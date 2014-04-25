@@ -5,6 +5,7 @@ This is the interview project that I completed while interviewing with MediaMath
 
 ## To run
 * Clone the repo or download the files.
+* Replace the api_token value in campaign-viewer.js with the api_token you request from the mediamath interview challenge API
 * Open index.html using Chrome or Firefox
 
 ## Functionalities
