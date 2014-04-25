@@ -1,0 +1,63 @@
+#campaignViewer{
+	width: 100%;
+	height: 100%;
+	margin-top: 20px;
+}
+
+th{
+	text-align: center;
+}
+
+td{
+	vertical-align: middle;
+}
+
+.vcenter{
+	text-align: center;
+}
+
+#campaignsSection{
+	width: 70%;
+	float: right;
+	height: 100%;
+	margin-right: 20px;
+}
+
+#dropdownChoose{
+	width: 25%;
+	height: 200px;
+	float: left;
+}
+
+.dropdownHeader{
+	float: left;
+	height: 50px;
+	font-size: 17px;
+	font-size: 17px;
+	width: 30%;
+	text-align: center;
+	padding-top: 5px;
+}
+
+.dropdown{
+	float: right;
+}
+
+.dropdownrow{
+	width: 100%;
+	height: 30%;
+}
+
+.button{
+	color: #fff;
+	background-color: #428bca;
+	border-color: #357ebd;
+}
+
+.saveButton{
+	float: right;
+}
+
+.campaignID{
+	display:none;
+}

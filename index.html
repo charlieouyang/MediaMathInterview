@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Campaign Viewer</title>
+        <!-- 3rd party libraries -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="js/third-party/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/third-party/bootstrap-select.js"></script>
+        <script type="text/javascript" src="js/third-party/bootstrap-datepicker.js"></script>
+        <script type="text/javascript" src="js/third-party/underscore-min.js"></script>
+        <script type="text/javascript" src="js/third-party/bootbox.min.js"></script>
+        <link href="css/third-party/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="css/third-party/bootstrap-select.css">
+        <link rel="stylesheet" type="text/css" href="css/third-party/datepicker.css">
+        <!-- my own -->
+        <script type="text/javascript" src="js/campaign-viewer.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/campaign-viewer.css">
+        <script id="campaignsTableTemplate" type="text/html">
+            <table id="campaignsTable" class="table table-striped table-bordered table-condensed">
+                <thead>
+                    <tr id="headerRow">
+                        <th style="width: 5%;"><input type="checkbox" class="selectBox" id="overallCheckBox"></th>
+                        <th style="width: 25%;">Campaign Name</th>
+                        <th style="width: 15%">Status</th>
+                        <th style="width: 15%">Budget</th>
+                        <th style="width: 20%">Start Date</th>
+                        <th style="width: 20%">End Date</th>
+                    </tr>
+                </thead>
+                <tbody class="campaigns-table-body">
+                    <% for (var i = 0; i < campaigns.length; i++){ %>
+                    <% var campaign = campaigns[i]; %>
+                    <tr>
+                        <td class="campaignID"><%= campaign._id %></td>
+                        <td class="vcenter"><input type="checkbox" class="selectBox modifyItem"/></td>
+                        <td><input type="text" class="form-control campaignName" value="<%= campaign.name %>"></td>
+                        <td >
+                            <select class="selectpicker campaignStatus" class="campaignSelect">
+                                <% if (campaign.status == true){ %>
+                                    <option value="Active" selected>Active</option>
+                                    <option value="Inactive">Inactive</option>
+                                <%} else{ %>
+                                    <option value="Active">Active</option>
+                                    <option value="Inactive" selected>Inactive</option>
+                                <% } %>
+                            </select>
+                        </td>
+                        <td><input type="text" class="form-control campaignBudget" value="<%= campaign.budget %>"></td>
+                        <% var startDate = new Date(campaign.start_date); %>
+                        <% finalStartDate = new Date(startDate.getTime() + startDate.getTimezoneOffset()*60000); %>
+                        <% var formattedStartDate = (finalStartDate.getMonth() + 1) + "/" + finalStartDate.getDate() + "/" +  startDate.getFullYear(); %>
+                        <td><input type="text" class="form-control datepicker campaignStartDate" id="<%= i + "a" %>" value="<%= formattedStartDate %>"></td>
+                        <% var endDate = new Date(campaign.end_date); %>
+                        <% finalEndDate = new Date(endDate.getTime() + endDate.getTimezoneOffset()*60000); %>
+                        <% var formattedEndDate = (finalEndDate.getMonth() + 1) + "/" + finalEndDate.getDate() + "/" +  endDate.getFullYear(); %>
+                        <td><input type="text" class="form-control datepicker campaignEndDate" id="<%= i + "b" %>" value="<%= formattedEndDate %>"></td>
+                    </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </script>
+    </head>
+    <body>
+        <div id="campaignViewer">
+            <div id="dropdownChoose">
+                <div class="dropdownrow">
+                    <div class="dropdownHeader">Agency</div>
+                    <div class="dropdown">
+                        <select class="selectpicker" id="agencySelect">
+                            <option value="defaultOption">Choose an agency...</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="dropdownrow">
+                    <div class="dropdownHeader">Advertiser</div>
+                    <div class="dropdown">
+                        <select class="selectpicker" id="advertiserSelect">
+                            <option value="defaultOption">Choose an advertiser...</option>
+                        </select>
+                        <br>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button type="button" class="button btn" id="getCampaigns">Get Campaigns</button>
+                </div>
+            </div>
+            <div id="campaignsSection">
+                <div id="campaignsTableSection"></div>
+                <button type="button" class="button btn saveButton" id="saveCampaigns">Save</button>
+            </div>
+        </div>
+    </body>
+</html>
